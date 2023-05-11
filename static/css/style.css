@@ -1,7 +1,12 @@
-html,header,body,footer,section,h1,h2,h3,p,ul,li,table,thead,tbody,th,td,tr{
+html,header,body,footer,section,h1,h2,h3,p,a,ul,li,table,thead,tbody,th,td,tr{
     margin: 0;
     padding: 0;
     font-family: 'Yu Gothic';
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
 }
 
 /* header////////////////////////////////////////////////////////////////////////////////// */

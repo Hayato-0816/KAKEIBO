@@ -19,9 +19,9 @@
     <main>
         <div class="monthclass">
             <div class="month_flex">
-                <h2>○○○○年○○月</h2>
-                <div class="page_change">＜</div>
-                <div class="page_change">＞</div>
+                <h2>{% now "Y年 m月"%}</h2>
+                <div class="page_change"><a href="">＜</a></div>
+                <div class="page_change"><a href="">＞</a></div>
             </div>
         </div>
         <section>
@@ -38,7 +38,7 @@
                     <tbody>
                         <tr>
                             <td>給与</td>
-                            <td></td>
+                            <td><a href="">{{ income_data.salary }}</a></td>
                             <td></td>
                         </tr>
                         <tr>

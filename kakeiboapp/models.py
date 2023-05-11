@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 # class MonthModels(models.Model):
@@ -12,7 +13,7 @@ class IncomeModel(models.Model):
         blank=True,
         default=0
         )
-    income_date = models.DateField()
+    income_date = models.DateField(blank=True, null=True)
     salary = models.IntegerField(verbose_name='給料')
     commuting_allowance = models.IntegerField(verbose_name='交通費')
     total_tax = models.IntegerField(verbose_name='税金/社会保険料')
@@ -20,6 +21,9 @@ class IncomeModel(models.Model):
     def save(self, *args, **kwargs):
         self.income = (self.salary + self.commuting_allowance) - self.total_tax
         super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return str(self.income_date)
 
 # TAX_CATEGORY = (('health_insurance','健康保険'),('welfare_pension','厚生年金'),('employment_insurance','雇用保険'),('income_tax','所得税'),('resident_tax','住民税'))
 class TaxModel(models.Model):

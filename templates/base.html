@@ -1,3 +1,5 @@
+{% load humanize %}
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -19,183 +21,246 @@
     <main>
         <div class="monthclass">
             <div class="month_flex">
-                <h2>{% now "Y年 m月"%}</h2>
+                <h2>{{ month_data.date.year }}年 {{ month_data.date.month }}月</h2>
                 <div class="page_change"><a href="">＜</a></div>
                 <div class="page_change"><a href="">＞</a></div>
             </div>
         </div>
         <section>
-            <div class="income">
-                <h3>収入</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>支給額</th>
-                            <th>控除額</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>給与</td>
-                            <td>￥<a href="" class="a_tag">{{ income_data.salary }}</a></td>
-                            <td>￥</td>
-                        </tr>
-                        <tr>
-                            <td>通勤手当</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>税金/社会保険料</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>健康保険</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>厚生年金</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>雇用保険</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>所得税</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>住民税</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>総支給額</td>
-                            <td colspan="2"></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <div class="expense">
-                <div class="detail_expense">
-                    <h3>支出(固定費)</h3>
+            <form action="" method="post">
+                <div class="income">
+                    <h3>収入</h3>
                     <table>
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>金額</th>
+                                <th>支給額</th>
+                                <th>控除額</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>携帯代/通信費</td>
+                                <td>給与</td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <label for="salary"></label>
+                                        <input type="text" name="" id="" value="{{ month_data.salary | intcomma }}">
+                                    </div>
+                                </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
+                                <td>通勤手当</td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <input type="text" name="" id="" value="{{ month_data.commuting_allowance | intcomma }}">
+                                    </div>
+                                </td>
                                 <td></td>
                             </tr>
                             <tr>
+                                <td>税金/社会保険料</td>
                                 <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <input type="text" name="" id="" value="{{ month_data.total_tax | intcomma }}">
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
+                                <td>健康保険</td>
                                 <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <input type="text" name="" id="" value="{{ month_data.health_insurance | intcomma }}">
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
+                                <td>厚生年金</td>
                                 <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <input type="text" name="" id="" value="{{ month_data.welfare_pension | intcomma }}">
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
+                                <td>雇用保険</td>
                                 <td></td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <input type="text" name="" id="" value="{{ month_data.employment_insurance | intcomma }}">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>所得税</td>
                                 <td></td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <input type="text" name="" id="" value="{{ month_data.income_tax | intcomma }}">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>住民税</td>
+                                <td></td>
+                                <td>
+                                    <div class="table_marge">
+                                        <div>￥</div>
+                                        <input type="text" name="" id="" value="{{ month_data.resident_tax | intcomma }}">
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td>固定費計</td>
-                                <td></td>
+                                <td>総支給額</td>
+                                <td colspan="2">
+                                    <div class="sum_data">
+                                        <div>￥</div>
+                                        <div>{{ month_data.income | intcomma }}</div>
+                                    </div>
+                                </td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-                <div class="detail_expense">
-                    <h3>支出(変動費)</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>金額</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>食費</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>外食費</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>交通費</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>交際費</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>医療費</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>雑費/日用品費</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>変動費計</td>
-                                <td></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                <div class="expense">
+                    <div class="detail_expense">
+                        <h3>支出(固定費)</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>金額</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>携帯代/通信費</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>固定費計</td>
+                                    <td>
+                                        <div class="sum_data">
+                                            <div>￥</div>
+                                            <div>{{ month_data.fixed_cost | intcomma }}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="detail_expense">
+                        <h3>支出(変動費)</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>金額</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>食費</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>外食費</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>交通費</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>交際費</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>医療費</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>雑費/日用品費</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>変動費計</td>
+                                    <td>
+                                        <div class="sum_data">
+                                            <div>￥</div>
+                                            <div>{{ month_data.variable_cost | intcomma }}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </form>
         </section>
         <div class="total">
             <div class="total_detail total_expense">
                 <table>
                     <tr>
                         <td>総支出</td>
-                        <td></td>
+                        <td class="vtfoot">
+                            <div class="sum_data">
+                                <div>￥</div>
+                                <div>{{ month_data.total_expense | intcomma }}</div>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -203,7 +268,12 @@
                 <table>
                     <tr>
                         <td>総計</td>
-                        <td></td>
+                        <td class="vtfoot">
+                            <div class="sum_data">
+                                <div>￥</div>
+                                <div>{{ month_data.month_total | intcomma }}</div>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div>
